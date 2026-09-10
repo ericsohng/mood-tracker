@@ -15,7 +15,7 @@ function sendAfternoonReminder() {
 }
 
 function sendEveningReminder() {
-  tgNotifyOwner_('🌙 Evening check-in — how did today feel overall (1–10)?');
+  tgNotifyOwner_('🌙 Evening check-in — how are you feeling (1–10)?');
 }
 
 /**
