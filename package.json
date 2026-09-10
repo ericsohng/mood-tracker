@@ -1,0 +1,15 @@
+{
+  "name": "mood-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Personal mood tracker: Telegram bot + Google Apps Script + Google Sheet.",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "push": "clasp push",
+    "deploy": "clasp deploy"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

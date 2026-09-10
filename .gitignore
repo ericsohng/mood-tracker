@@ -1,0 +1,12 @@
+node_modules/
+
+# clasp OAuth credentials — NEVER commit (this is your Google login token).
+.clasprc.json
+~/.clasprc.json
+
+# Local logs / OS cruft
+*.log
+.DS_Store
+
+# Note: .clasp.json (scriptId + rootDir) contains no secrets and is safe to
+# commit for cross-machine convenience. Secrets live only in Script Properties.
