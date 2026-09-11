@@ -3,8 +3,8 @@
  *
  * Apps Script web apps answer a POST with a 302 redirect, which Telegram's
  * webhook client rejects ("Wrong response from the webhook: 302 Found"). So
- * instead of a webhook we poll getUpdates on a 1-minute trigger. Reply latency
- * is up to ~1 minute — fine for mood logging. Reuses handleMessage_ from
+ * instead of a webhook we poll getUpdates on a 5-minute trigger. Reply latency
+ * is up to ~5 minutes — fine for mood logging. Reuses handleMessage_ from
  * Webhook.gs and tgApiUrl_ from Telegram.gs.
  */
 
@@ -30,7 +30,7 @@ function tgGetUpdates_(offset) {
 }
 
 /**
- * Pull and process new messages. Runs on the 1-minute trigger.
+ * Pull and process new messages. Runs on the 5-minute trigger.
  */
 function pollUpdates() {
   var cfg = getConfig_();
@@ -57,12 +57,12 @@ function pollUpdates() {
 }
 
 /**
- * Install (or refresh) the 1-minute polling trigger. Idempotent.
+ * Install (or refresh) the 5-minute polling trigger. Idempotent.
  */
 function installPolling() {
   ScriptApp.getProjectTriggers().forEach(function (t) {
     if (t.getHandlerFunction() === 'pollUpdates') ScriptApp.deleteTrigger(t);
   });
-  ScriptApp.newTrigger('pollUpdates').timeBased().everyMinutes(1).create();
-  console.log('Polling installed: pollUpdates runs every 1 minute.');
+  ScriptApp.newTrigger('pollUpdates').timeBased().everyMinutes(5).create();
+  console.log('Polling installed: pollUpdates runs every 5 minutes.');
 }
