@@ -78,9 +78,9 @@ function handleCommand_(cmd, chatId) {
 
 function helpText_() {
   return [
-    'Log your mood by sending a number 1–10, optionally with notes:',
-    '  7',
-    '  8 great workout',
+    'Log your mood by sending a number 1–5 (decimals ok), optionally with notes:',
+    '  3.5',
+    '  4 great workout',
     '',
     'Commands:',
     '  /stats — today & 7-day averages',

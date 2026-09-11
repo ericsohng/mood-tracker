@@ -1,45 +1,52 @@
 const { parseMoodMessage, parseCommand } = require('../src/Parser.js');
 
 describe('parseMoodMessage', () => {
-  test('bare number', () => {
-    expect(parseMoodMessage('7')).toEqual({ mood: 7, notes: '' });
+  test('bare integer', () => {
+    expect(parseMoodMessage('3')).toEqual({ mood: 3, notes: '' });
   });
 
-  test('number with notes', () => {
-    expect(parseMoodMessage('7 slept badly')).toEqual({ mood: 7, notes: 'slept badly' });
+  test('one decimal', () => {
+    expect(parseMoodMessage('3.5')).toEqual({ mood: 3.5, notes: '' });
+  });
+
+  test('decimal with notes', () => {
+    expect(parseMoodMessage('4.5 slept badly')).toEqual({ mood: 4.5, notes: 'slept badly' });
   });
 
   test('comma separator', () => {
-    expect(parseMoodMessage('8, tired')).toEqual({ mood: 8, notes: 'tired' });
+    expect(parseMoodMessage('2, tired')).toEqual({ mood: 2, notes: 'tired' });
   });
 
   test('dash separator', () => {
-    expect(parseMoodMessage('6 - meh')).toEqual({ mood: 6, notes: 'meh' });
+    expect(parseMoodMessage('3 - meh')).toEqual({ mood: 3, notes: 'meh' });
   });
 
-  test('surrounding whitespace and newlines', () => {
-    expect(parseMoodMessage('  10   great day ')).toEqual({ mood: 10, notes: 'great day' });
-    expect(parseMoodMessage('9\ngood sleep')).toEqual({ mood: 9, notes: 'good sleep' });
+  test('whitespace and newlines', () => {
+    expect(parseMoodMessage('  5   great day ')).toEqual({ mood: 5, notes: 'great day' });
+    expect(parseMoodMessage('4\ngood sleep')).toEqual({ mood: 4, notes: 'good sleep' });
   });
 
-  test('boundaries 1 and 10 are valid', () => {
+  test('boundaries 1 and 5 are valid', () => {
     expect(parseMoodMessage('1')).toEqual({ mood: 1, notes: '' });
-    expect(parseMoodMessage('10')).toEqual({ mood: 10, notes: '' });
+    expect(parseMoodMessage('5')).toEqual({ mood: 5, notes: '' });
   });
 
   test('out of range', () => {
     expect(parseMoodMessage('0').error).toMatch(/out of range/);
-    expect(parseMoodMessage('11').error).toMatch(/out of range/);
+    expect(parseMoodMessage('0.5').error).toMatch(/out of range/);
+    expect(parseMoodMessage('5.5').error).toMatch(/out of range/);
+    expect(parseMoodMessage('6').error).toMatch(/out of range/);
     expect(parseMoodMessage('-3').error).toMatch(/out of range/);
   });
 
-  test('non-whole numbers rejected', () => {
-    expect(parseMoodMessage('7.5').error).toMatch(/whole number/);
+  test('more than one decimal rejected', () => {
+    expect(parseMoodMessage('3.55').error).toMatch(/one decimal/);
+    expect(parseMoodMessage('4.25').error).toMatch(/one decimal/);
   });
 
   test('non-numeric rejected', () => {
     expect(parseMoodMessage('abc').error).toBeDefined();
-    expect(parseMoodMessage('7abc').error).toBeDefined();
+    expect(parseMoodMessage('3abc').error).toBeDefined();
   });
 
   test('empty / null rejected', () => {
@@ -59,7 +66,7 @@ describe('parseCommand', () => {
   });
 
   test('non-commands return null', () => {
-    expect(parseCommand('7')).toBeNull();
+    expect(parseCommand('3')).toBeNull();
     expect(parseCommand('hello')).toBeNull();
     expect(parseCommand('')).toBeNull();
     expect(parseCommand(null)).toBeNull();

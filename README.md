@@ -1,7 +1,7 @@
 # Mood Tracker
 
 A personal mood tracker with **zero servers and no monthly cost**. A Telegram bot
-pings you a few times a day; you reply with a number 1–10 (plus optional notes) and it
+pings you a few times a day; you reply with a number 1–5 (plus optional notes) and it
 lands in a Google Sheet that auto-graphs your mood. Built on Google Apps Script.
 
 ```
@@ -142,8 +142,8 @@ npm test
 ```
 
 **End-to-end smoke test:**
-- Message the bot `8 good day` → a row appears in `entries` + a `✅ Logged 8 …` reply.
-- Message `abc` and `12` → friendly error, no row written.
+- Message the bot `3.5 good day` → a row appears in `entries` + a `✅ Logged 3.5 …` reply.
+- Message `abc` and `6` → friendly error, no row written.
 - `/stats` → today + 7-day averages.
 - In the editor, run `sendMorningReminder()` → you get the ping.
 - Add a few rows → the `dashboard` charts populate.

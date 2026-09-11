@@ -6,16 +6,16 @@
  */
 
 function sendMorningReminder() {
-  tgNotifyOwner_('🌅 Morning check-in — how are you feeling (1–10)? ' +
-    'Reply with a number, e.g. "7 slept well".');
+  tgNotifyOwner_('🌅 Morning check-in — how are you feeling (1–5)? ' +
+    'Reply with a number, e.g. "3.5 slept well".');
 }
 
 function sendAfternoonReminder() {
-  tgNotifyOwner_('☀️ Afternoon check-in — mood right now (1–10)?');
+  tgNotifyOwner_('☀️ Afternoon check-in — mood right now (1–5)?');
 }
 
 function sendEveningReminder() {
-  tgNotifyOwner_('🌙 Evening check-in — how are you feeling (1–10)?');
+  tgNotifyOwner_('🌙 Evening check-in — how are you feeling (1–5)?');
 }
 
 /**
